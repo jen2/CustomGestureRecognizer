@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "zLetterGestureRecognizer.h"
 
 @interface ViewController ()
 
@@ -14,14 +15,33 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [self.view addGestureRecognizer:[[ZLetterGestureRecognizer alloc] initWithTarget:self action:@selector(zLetterMade:)]];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)zLetterMade:(ZLetterGestureRecognizer *)zLetterRecognizer
+{
+    NSLog(@"Z letter made by the user!!"); //This will be printed when the gesture is recognized.
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Your Gesture was recognized!"
+                                                                             message:@"Nice job!"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    
+    
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+
 }
+
+
 
 @end
